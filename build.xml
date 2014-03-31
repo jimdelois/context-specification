@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	name="ContextSpecification"
+	basedir="."
+	default="documentapi"
+	description="The primary build file for the Context Specification Library"
+>
+	<!--
+	<property file="build.properties" />
+	-->
+	<tstamp>
+		<format property="timestamp" pattern="%Y-%m-%d %H:%M" />
+	</tstamp>
+
+	<target name="documentapi">
+		<includepath classpath="./vendor/phpdocumentor" />
+
+		<!--
+		TODO: Ensure that the directory is cleaned and CREATED (this task will fail otherwise)
+		-->
+
+		<phpdoc2 title="API Documentation"
+				 destdir="./buildoutput/api"
+				 template="clean">
+			<fileset dir="./src">
+				<include name="**/*.php" />
+			</fileset>
+		</phpdoc2>
+	</target>
+</project>
