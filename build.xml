@@ -37,6 +37,17 @@
 
 
 
+	<target name="lint">
+		<phplint deprecatedAsError="true" haltonfailure="true">
+			<fileset dir="src">
+				<include name="**/*.php"/>
+			</fileset>
+			<fileset dir="tests">
+				<include name="**/*.php"/>
+			</fileset>
+		</phplint>
+	</target>
+
 
 	<target name="documentapi">
 		<includepath classpath="./vendor/phpdocumentor" />
@@ -57,7 +68,7 @@
 
 
 
-	<target name="test-unit">
+	<target name="test-unit" depends="lint">
 		<exec
 			executable="/usr/local/zend/bin/php"
 			dir="tests"
