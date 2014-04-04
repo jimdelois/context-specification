@@ -5,26 +5,78 @@
 	default="documentapi"
 	description="The primary build file for the Context Specification Library"
 >
+
+
+	<property name="dirs.buildoutput" value="buildoutput" />
+
 	<!--
 	<property file="build.properties" />
 	-->
+
+
+
 	<tstamp>
 		<format property="timestamp" pattern="%Y-%m-%d %H:%M" />
 	</tstamp>
 
+
+
+	<target name="build" depends="prepare,test-unit,documentapi" />
+
+	<target name="clean">
+		<delete dir="${dirs.buildoutput}" includeemptydirs="true" verbose="true" />
+	</target>
+
+
+
+
+	<target name="prepare" depends="clean" description="Prepares files and directories for build">
+		<mkdir dir="${dirs.buildoutput}" />
+	</target>
+
+
+
+
+
 	<target name="documentapi">
 		<includepath classpath="./vendor/phpdocumentor" />
 
-		<!--
-		TODO: Ensure that the directory is cleaned and CREATED (this task will fail otherwise)
-		-->
+		<mkdir dir="${dirs.buildoutput}/docs/api" />
 
 		<phpdoc2 title="API Documentation"
-				 destdir="./buildoutput/api"
+				 destdir="${dirs.buildoutput}/docs/api"
 				 template="clean">
 			<fileset dir="./src">
 				<include name="**/*.php" />
 			</fileset>
 		</phpdoc2>
 	</target>
+
+
+
+
+
+
+	<target name="test-unit">
+		<exec
+			executable="/usr/local/zend/bin/php"
+			dir="tests"
+			checkreturn="true"
+		>
+		<!-- Consider using 'passthru="true"' as an "exec" attribute... -->
+			<arg path="../vendor/bin/phpunit" />
+		<!-- <arg value="- -testdox" /> -->
+
+
+
+		</exec>
+
+		<mkdir dir="${dirs.buildoutput}/phpunit-report-html" />
+
+		<phpunitreport infile="${dirs.buildoutput}/phpunit-log-junit.xml"
+			   format="frames"
+			   todir="${dirs.buildoutput}/phpunit-report-html"
+		/>
+	</target>
+
 </project>

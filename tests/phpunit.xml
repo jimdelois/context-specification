@@ -13,5 +13,10 @@
 		</testsuite>
 -->
 	</testsuites>
-
+	<logging>
+		<log type="junit" target="../buildoutput/phpunit-log-junit.xml" />
+		<log type="coverage-clover" target="../buildoutput/phpunit-coverage-clover.xml" />
+		<log type="coverage-html" target="../buildoutput/phpunit-coverage-html" title="ContextSpecification" />
+		<log type="coverage-text" target="../buildoutput/phpunit-coverage-text.txt" title="ContextSpecification" />
+	</logging>
 </phpunit>
