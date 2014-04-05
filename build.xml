@@ -7,7 +7,9 @@
 >
 
 
-	<property name="dirs.buildoutput" value="buildoutput" />
+	<property name="exec.php" value="/usr/bin/php" override="true" />
+	<property name="dir.buildoutput" value="buildoutput" />
+	
 
 	<!--
 	<property file="build.properties" />
@@ -24,14 +26,14 @@
 	<target name="build" depends="prepare,test-unit,documentapi" />
 
 	<target name="clean">
-		<delete dir="${dirs.buildoutput}" includeemptydirs="true" verbose="true" />
+		<delete dir="${dir.buildoutput}" includeemptydirs="true" verbose="true" />
 	</target>
 
 
 
 
 	<target name="prepare" depends="clean" description="Prepares files and directories for build">
-		<mkdir dir="${dirs.buildoutput}" />
+		<mkdir dir="${dir.buildoutput}" />
 	</target>
 
 
@@ -52,10 +54,10 @@
 	<target name="documentapi">
 		<includepath classpath="./vendor/phpdocumentor" />
 
-		<mkdir dir="${dirs.buildoutput}/docs/api" />
+		<mkdir dir="${dir.buildoutput}/docs/api" />
 
 		<phpdoc2 title="API Documentation"
-				 destdir="${dirs.buildoutput}/docs/api"
+				 destdir="${dir.buildoutput}/docs/api"
 				 template="clean">
 			<fileset dir="./src">
 				<include name="**/*.php" />
@@ -70,7 +72,7 @@
 
 	<target name="test-unit" depends="lint">
 		<exec
-			executable="/usr/local/zend/bin/php"
+			executable="${exec.php}"
 			dir="tests"
 			checkreturn="true"
 		>
@@ -82,11 +84,11 @@
 
 		</exec>
 
-		<mkdir dir="${dirs.buildoutput}/phpunit-report-html" />
+		<mkdir dir="${dir.buildoutput}/phpunit-report-html" />
 
-		<phpunitreport infile="${dirs.buildoutput}/phpunit-log-junit.xml"
+		<phpunitreport infile="${dir.buildoutput}/phpunit-log-junit.xml"
 			   format="frames"
-			   todir="${dirs.buildoutput}/phpunit-report-html"
+			   todir="${dir.buildoutput}/phpunit-report-html"
 		/>
 	</target>
 
