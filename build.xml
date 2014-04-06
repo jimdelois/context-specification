@@ -92,4 +92,34 @@
 		/>
 	</target>
 
+
+
+
+	<target name="package" depends="build">
+
+
+		<mkdir dir="${dir.buildoutput}/artifacts/src-package" />
+
+		<copy todir="${dir.buildoutput}/artifacts/src-package" >
+			<fileset dir=".">
+				<include name="src/**/*" />
+				<include name="tests/**/*" />
+			</fileset>
+			<filelist dir="." files="composer.json,LICENSE,README.md"/>
+		</copy>
+
+		<exec
+			executable="tar"
+			checkreturn="true"
+			dir="${dir.buildoutput}/artifacts"
+		>
+			<arg value="-cvzf" /><arg path="src-package.tar.gz" />
+			<arg path="src-package/" />
+		</exec>
+
+		<delete dir="${dir.buildoutput}/artifacts/src-package" includeemptydirs="true" verbose="true" />
+	</target>
+
+
+
 </project>
