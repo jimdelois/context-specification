@@ -151,7 +151,7 @@ Context Specification framework does the favor of minimizing the amount of work 
 with these nuances. By simply calling `$this->becauseWillThrowException( );`, the Concern will be configured to
 automatically wrap the `because` method contents in a lambda, meaning one can define the state change as per usual. Then,
 two additional methods become available which can be used from within observations to validate and assert the
-resultant Exceptions: `triggerException` and `captureException`.
+resultant Exceptions: `releaseException` and `captureException`.
 
 Examples
 --------
@@ -266,7 +266,7 @@ that an exception is raised is the input isn't a `\DateTime` object.
 			 */
 			public function should_raise_invalid_argument_exception( ) {
 				$this->setExpectedException( '\InvalidArgumentException' );
-				$this->triggerException( );
+				$this->releaseException( );
 			}
 		}
     ?>

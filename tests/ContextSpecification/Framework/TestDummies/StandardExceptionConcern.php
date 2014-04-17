@@ -46,7 +46,7 @@ class StandardExceptionConcern extends \ContextSpecification\Framework\Concern {
 
 	public function using_trigger_exception( ) {
 		$this->call_log[ ] = 'using_trigger_exception';
-		$this->triggerException();
+		$this->releaseException();
 	}
 
 	public function getExceptionObject( ) {

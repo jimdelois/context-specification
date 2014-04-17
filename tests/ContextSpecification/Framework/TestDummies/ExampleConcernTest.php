@@ -61,7 +61,7 @@ class When_throwing_an_exception extends \ContextSpecification\Framework\Concern
 	 */
 	public function should_be_thrown_as_expected_exception( ) {
 		$this->setExpectedException( '\InvalidArgumentException' );
-		$this->triggerException( );
+		$this->releaseException( );
 	}
 }
 

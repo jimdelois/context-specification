@@ -143,7 +143,7 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
 	 * so that the actual throwing occurs as part of the observation, when expected.
 	 *
 	 * The raising of the Exception may then be done at a controlled point from within
-	 * an observation (using <code>captureException</code> or <code>triggerException</code>),
+	 * an observation (using <code>captureException</code> or <code>releaseException</code>),
 	 * yet allows the <code>because</code> method to be written in a normal fashion,
 	 * agnostic of this behavior.
 	 *
@@ -248,7 +248,7 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
 	 * @throws \RuntimeException If Concern is not flagged for state transition to throw Exception
 	 * @throws \Exception So any expectations for one can be met
 	 */
-	final protected function triggerException( ) {
+	final protected function releaseException( ) {
 		if ( ! $this->because_will_throw_exception ) {
 			throw new \RuntimeException( 'Must configure test for Exception-throwing Because method prior to calling "captureException".' );
 		}
