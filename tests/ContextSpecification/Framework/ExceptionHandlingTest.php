@@ -41,6 +41,9 @@
 namespace Tests\ContextSpecification\Framework;
 
 use Tests\ContextSpecification\Framework\TestDummies\StandardExceptionConcern;
+use Tests\ContextSpecification\Framework\TestDummies\NonBooleanIntoBecauseExceptionConcern;
+use Tests\ContextSpecification\Framework\TestDummies\BecauseExceptionNotSetConcern;
+use Tests\ContextSpecification\Framework\TestDummies\ExceptionNotActuallyThrownConcern;
 
 class ExceptionConcernTest extends \PHPUnit_Framework_TestCase {
 
@@ -114,6 +117,57 @@ class ExceptionConcernTest extends \PHPUnit_Framework_TestCase {
 	}
 
 
+	public function testNonBooleanInputToBecauseWillRaiseExceptionMethod( ) {
+		$concern = new NonBooleanIntoBecauseExceptionConcern( );
+		$result = $concern->run( );
+
+		$this->assertFalse( $result->wasSuccessful( ) );
+		$this->assertEquals( 1 , $result->errorCount( ) );
+	}
+
+
+	public function testBecauseWillRaiseExceptionNotCalledPriorToReleasing( ) {
+		$concern = new BecauseExceptionNotSetConcern( );
+		$result = $concern->run( );
+		try {
+			$concern->testReleasing();
+		} catch( \RuntimeException $e ) {
+			$this->assertEquals(
+				'Must configure test for Exception-throwing Because method prior to calling "releaseException".'
+				, $e->getMessage( )
+			);
+		}
+
+
+		$this->assertFalse( $result->wasSuccessful( ) );
+		$this->assertEquals( 1 , $result->errorCount( ) );
+	}
+
+
+
+	public function testBecauseWillRaiseExceptionNotCalledPriorToCapturing( ) {
+		$concern = new BecauseExceptionNotSetConcern( );
+		$result = $concern->run( );
+		try {
+			$concern->testCapturing();
+		} catch( \RuntimeException $e ) {
+			$this->assertEquals(
+				'Must configure test for Exception-throwing Because method prior to calling "captureException".'
+				, $e->getMessage( )
+			);
+		}
+
+		$this->assertFalse( $result->wasSuccessful( ) );
+		$this->assertEquals( 1 , $result->errorCount( ) );
+	}
+
+
+	public function testExceptionNotActuallyThrownWhileTryingToCapture( ) {
+		$concern = new ExceptionNotActuallyThrownConcern( );
+		$result = $concern->run( );
+
+		$this->assertNull( $concern->getCaptured( ) );
+	}
 }
 
 
