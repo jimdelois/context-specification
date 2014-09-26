@@ -65,6 +65,31 @@ namespace ContextSpecification\Framework;
 abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * Used to store an expected result
+	 *
+	 * Convenience property made available so the <code>context</code>
+	 * method has a place to store some expected result useful for comparison
+	 * against the <code>result_actual</code> within test method assertions.
+	 * Often times, many subclasses can share the same result.
+	 *
+	 * @internal
+	 * @var mixed
+	 */
+	protected $result_expected;
+
+	/**
+	 * Used to store an actual result
+	 *
+	 * Convenience property made available so the <code>because</code>
+	 * method has a place to store the actual result useful for comparison
+	 * against the <code>result_expected</code> within test method assertions.
+	 *
+	 * @internal
+	 * @var mixed
+	 */
+	protected $result_actual;
+
+	/**
 	 * Flag to read internally
 	 *
 	 * Signals whether or not this Concern is marked to handle Exceptions thrown

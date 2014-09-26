@@ -166,8 +166,6 @@ Below are a couple of (silly) examples of how we might test a single method on a
 
 		class When_loading_first_awesomeness_from_service_for_date extends Concern {
 
-			protected $result_actual;
-			protected $result_expected;
 			protected $dao_awesomeness;
 			protected $date_time;
 
