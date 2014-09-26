@@ -168,6 +168,15 @@ class ExceptionConcernTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNull( $concern->getCaptured( ) );
 	}
+
+
+
+	public function testExceptionNotReleasedIfNotActuallyThrownWhileTryingToCapture( ) {
+		$concern = new ExceptionNotActuallyThrownConcern( );
+		$result = $concern->run( );
+
+		$this->assertNull( $concern->doRelease( ) );
+	}
 }
 
 

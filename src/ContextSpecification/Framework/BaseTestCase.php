@@ -252,7 +252,9 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
 		if ( ! $this->because_will_throw_exception ) {
 			throw new \RuntimeException( 'Must configure test for Exception-throwing Because method prior to calling "releaseException".' );
 		}
-		throw $this->captureException( );
+		if ( $e = $this->captureException( ) ) {
+			throw $e;
+		}
 	}
 }
 

@@ -15,6 +15,10 @@ class ExceptionNotActuallyThrownConcern extends \ContextSpecification\Framework\
 	public function getCaptured( ) {
 		return $this->captureException( );
 	}
+
+	public function doRelease( ) {
+		return $this->releaseException( );
+	}
 }
 
 ?>
