@@ -1,3 +1,5 @@
+[![Build Status](http://build.joviansoftware.com/job/ContextSpecification/badge/icon)](http://build.joviansoftware.com/job/ContextSpecification/)
+
 Context Specification Testing Framework
 ==========================================
 
