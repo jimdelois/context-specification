@@ -38,12 +38,12 @@
  *
  */
 
-namespace Tests\ContextSpecification\Framework;
+namespace ContextSpecification\Framework;
 
-use Tests\ContextSpecification\Framework\TestDummies\StandardExceptionConcern;
-use Tests\ContextSpecification\Framework\TestDummies\NonBooleanIntoBecauseExceptionConcern;
-use Tests\ContextSpecification\Framework\TestDummies\BecauseExceptionNotSetConcern;
-use Tests\ContextSpecification\Framework\TestDummies\ExceptionNotActuallyThrownConcern;
+use ContextSpecification\TestDummies\StandardExceptionConcern;
+use ContextSpecification\TestDummies\NonBooleanIntoBecauseExceptionConcern;
+use ContextSpecification\TestDummies\BecauseExceptionNotSetConcern;
+use ContextSpecification\TestDummies\ExceptionNotActuallyThrownConcern;
 
 class ExceptionConcernTest extends \PHPUnit_Framework_TestCase {
 
