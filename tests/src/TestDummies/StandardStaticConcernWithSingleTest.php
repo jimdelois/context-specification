@@ -4,6 +4,8 @@ namespace ContextSpecification\TestDummies;
 
 class StandardStaticConcernWithSingleTest extends \ContextSpecification\Framework\StaticConcern {
 
+	use Traits\DummyConcernTrait;
+
 	public $count_context = 0;
 	public $count_because = 0;
 	public $count_create_sut = 0;
@@ -36,6 +38,7 @@ class StandardStaticConcernWithSingleTest extends \ContextSpecification\Framewor
 		$this->call_log[ ] = 'test_something';
 		$this->assertFalse( false );
 	}
+
 }
 
 ?>

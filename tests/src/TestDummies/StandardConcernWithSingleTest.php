@@ -4,6 +4,8 @@ namespace ContextSpecification\TestDummies;
 
 class StandardConcernWithSingleTest extends \ContextSpecification\Framework\Concern {
 
+	use Traits\DummyConcernTrait;
+
 	public $count_context = 0;
 	public $count_because = 0;
 	public $count_create_sut = 0;
