@@ -2,8 +2,9 @@
 <phpunit
     colors="true"
     verbose="true"
-    beStrictAboutOutputDuringTests="false"
+    beStrictAboutOutputDuringTests="true"
     strictCoverage="true"
+    forceCoversAnnotation="false"
 >
 
     <php>

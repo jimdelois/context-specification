@@ -4,6 +4,7 @@ namespace ContextSpecification\TestDummies;
 
 class BecauseExceptionNotSetConcern extends \ContextSpecification\Framework\StaticConcern {
 
+	use Traits\DummyConcernTrait;
 
 	protected function context( ) {
 		$this->becauseWillThrowException( false );
