@@ -38,9 +38,9 @@
  *
  */
 
-namespace Tests\ContextSpecification\Framework;
+namespace ContextSpecification\Framework;
 
-use Tests\ContextSpecification\Framework\TestDummies\StandardStaticConcernWithSingleTest;
+use ContextSpecification\TestDummies\StandardStaticConcernWithSingleTest;
 
 class StaticConcernTest extends \PHPUnit_Framework_TestCase {
 

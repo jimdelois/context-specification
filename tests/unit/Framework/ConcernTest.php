@@ -38,10 +38,10 @@
  *
  */
 
-namespace Tests\ContextSpecification\Framework;
+namespace ContextSpecification\Framework;
 
-use Tests\ContextSpecification\Framework\TestDummies\StandardConcernWithSingleTest;
-use Tests\ContextSpecification\Framework\TestDummies\StandardConcernWithMultipleTests;
+use ContextSpecification\TestDummies\StandardConcernWithSingleTest;
+use ContextSpecification\TestDummies\StandardConcernWithMultipleTests;
 
 class ConcernTest extends \PHPUnit_Framework_TestCase {
 

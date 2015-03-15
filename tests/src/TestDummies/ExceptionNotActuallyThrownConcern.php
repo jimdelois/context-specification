@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ContextSpecification\Framework\TestDummies;
+namespace ContextSpecification\TestDummies;
 
 class ExceptionNotActuallyThrownConcern extends \ContextSpecification\Framework\StaticConcern {
 
