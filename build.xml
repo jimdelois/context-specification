@@ -7,15 +7,8 @@
 >
 
 
-	<property name="exec.php" value="/usr/bin/php" override="true" />
-	<property name="dir.buildoutput" value="buildoutput" />
-	
-
-	<!--
-	<property file="build.properties" />
-	-->
-
-
+	<property name="exec.php" value="/usr/bin/env php" override="true" />
+	<property name="dir.build" value="build" />
 
 	<tstamp>
 		<format property="timestamp" pattern="%Y-%m-%d %H:%M" />
@@ -26,14 +19,14 @@
 	<target name="build" depends="prepare,test-unit,documentapi" />
 
 	<target name="clean">
-		<delete dir="${dir.buildoutput}" includeemptydirs="true" verbose="true" />
+		<delete dir="${dir.build}" includeemptydirs="true" verbose="true" />
 	</target>
 
 
 
 
 	<target name="prepare" depends="clean" description="Prepares files and directories for build">
-		<mkdir dir="${dir.buildoutput}" />
+		<mkdir dir="${dir.build}" />
 	</target>
 
 
@@ -54,10 +47,10 @@
 	<target name="documentapi">
 		<includepath classpath="./vendor/phpdocumentor" />
 
-		<mkdir dir="${dir.buildoutput}/docs/api" />
+		<mkdir dir="${dir.build}/docs/api" />
 
 		<phpdoc2 title="API Documentation"
-				 destdir="${dir.buildoutput}/docs/api"
+				 destdir="${dir.build}/docs/api"
 				 template="clean">
 			<fileset dir="./src">
 				<include name="**/*.php" />
@@ -71,25 +64,21 @@
 
 
 	<target name="test-unit" depends="lint">
-		<exec
-			executable="${exec.php}"
-			dir="tests"
-			checkreturn="true"
-		>
-		<!-- Consider using 'passthru="true"' as an "exec" attribute... -->
-			<arg path="../vendor/bin/phpunit" />
-		<!-- <arg value="- -testdox" /> -->
-
-
-
+        <exec
+            executable="./vendor/bin/phpunit"
+            dir="."
+            checkreturn="true"
+            passthru="true"
+        >
+    		<!--<arg value="- -testdox" />-->
 		</exec>
-
+        <!--
 		<mkdir dir="${dir.buildoutput}/phpunit-report-html" />
-
 		<phpunitreport infile="${dir.buildoutput}/phpunit-log-junit.xml"
 			   format="frames"
 			   todir="${dir.buildoutput}/phpunit-report-html"
 		/>
+        -->
 	</target>
 
 
@@ -98,26 +87,26 @@
 	<target name="package" depends="build">
 
 
-		<mkdir dir="${dir.buildoutput}/artifacts/src-package" />
+		<mkdir dir="${dir.build}/artifacts/src-package" />
 
-		<copy todir="${dir.buildoutput}/artifacts/src-package" >
+		<copy todir="${dir.build}/artifacts/src-package" >
 			<fileset dir=".">
 				<include name="src/**/*" />
 				<include name="tests/**/*" />
 			</fileset>
-			<filelist dir="." files="composer.json,LICENSE,README.md"/>
+			<filelist dir="." files="composer.json,LICENSE,phpunit.xml.dist"/>
 		</copy>
 
 		<exec
 			executable="tar"
 			checkreturn="true"
-			dir="${dir.buildoutput}/artifacts"
+			dir="${dir.build}/artifacts"
 		>
 			<arg value="-cvzf" /><arg path="src-package.tar.gz" />
 			<arg path="src-package/" />
 		</exec>
 
-		<delete dir="${dir.buildoutput}/artifacts/src-package" includeemptydirs="true" verbose="true" />
+		<delete dir="${dir.build}/artifacts/src-package" includeemptydirs="true" verbose="true" />
 	</target>
 
 

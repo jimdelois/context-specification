@@ -8,4 +8,4 @@
 /phpunit.xml
 
 # Build artifacts
-/build/reports
+/build
